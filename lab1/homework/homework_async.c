@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   /**
    * Communication
    */
-  MPI_Request myRequest;
+  MPI_Request myRequest[1000];
   MPI_Status myStatus;
   
   int i;
@@ -42,8 +42,10 @@ int main(int argc, char** argv) {
     char * send_number = malloc(sizeof(char) * buffer_size);
     double time_start = MPI_Wtime();
     for(i = 0; i < message_quantity; ++i) {
-      MPI_Isend(send_number, buffer_size, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &myRequest);
-      MPI_Wait(&myRequest, &myStatus);
+      MPI_Isend(send_number, buffer_size, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &myRequest[i]);
+    }
+    for(i = 0; i < message_quantity; ++i) {
+      MPI_Wait(&myRequest[i], &myStatus);
     }
     double time_end = MPI_Wtime();
     printf("Sender: %f\n", time_end - time_start);
@@ -53,8 +55,10 @@ int main(int argc, char** argv) {
     char * recv_number = malloc(sizeof(char) * buffer_size);
     double time_start = MPI_Wtime();
     for(i = 0; i < message_quantity; ++i) {
-      MPI_Irecv(recv_number, buffer_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &myRequest);
-      MPI_Wait(&myRequest, &myStatus);
+      MPI_Irecv(recv_number, buffer_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &myRequest[i]);
+    }
+    for(i = 0; i < message_quantity; ++i) {
+      MPI_Wait(&myRequest[i], &myStatus);
     }
     double time_end = MPI_Wtime();
     printf("Receiver: %f\n", time_end - time_start);
