@@ -36,24 +36,29 @@ int main(int argc, char** argv) {
    */
   MPI_Request myRequest;
   
+  int i;
   if(rank == 0) {
     char * send_number = malloc(sizeof(char) * buffer_size);
     double time_start = MPI_Wtime();
-    for(int i = 0; i < message_quantity; ++i) {
+    for(i = 0; i < message_quantity; ++i) {
       MPI_Isend(send_number, buffer_size, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &myRequest);
     }
     double time_end = MPI_Wtime();
     printf("Sender: %f\n", time_end - time_start);
+    exit(0);
   }
   else {
     char * recv_number = malloc(sizeof(char) * buffer_size);
     double time_start = MPI_Wtime();
-    for(int i = 0; i < message_quantity; ++i) {
+    for(i = 0; i < message_quantity; ++i) {
       MPI_Irecv(recv_number, buffer_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &myRequest);
     }
     double time_end = MPI_Wtime();
     printf("Receiver: %f\n", time_end - time_start);
+    exit(0);
   }
 
   MPI_Finalize();
+
+  exit(0);
 }

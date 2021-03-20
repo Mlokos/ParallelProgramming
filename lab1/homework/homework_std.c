@@ -35,10 +35,11 @@ int main(int argc, char** argv) {
    * Communication
    */
   
+  int i;
   if(rank == 0) {
     char * send_number = malloc(sizeof(int) * buffer_size);
     double time_start = MPI_Wtime();
-    for(int i = 0; i < message_quantity; ++i) {
+    for(i = 0; i < message_quantity; ++i) {
       MPI_Send(send_number, buffer_size, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
     }
     double time_end = MPI_Wtime();
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
   else {
     char * recv_number = malloc(sizeof(int) * buffer_size);
     double time_start = MPI_Wtime();
-    for(int i = 0; i < message_quantity; ++i) {
+    for(i = 0; i < message_quantity; ++i) {
       MPI_Recv(recv_number, buffer_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     }
     double time_end = MPI_Wtime();
