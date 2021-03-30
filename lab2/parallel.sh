@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# POINTS_QUANTITY=1000000000000
-POINTS_QUANTITY=1000
+# points quantity equals 1e12
+POINTS_QUANTITY=1000000000000
 
 function update_config_file {
     rm allnodes
@@ -24,13 +24,21 @@ function update_config_file {
         fi
     done
 }
-
 for NODES_QUAN in {1..12..1}
 do
     update_config_file
-    for i in {1..1000..1}
+    for i in {1..10..1}
     do
-        echo ----- >> parallel_${NODES_QUAN}_nodes.log
-	    mpiexec -np $NODES_QUAN ./homework_pi_parallel.out $POINTS_QUANTITY >> parallel_${NODES_QUAN}_nodes.log
+        echo ----- >> parallel_strong_${NODES_QUAN}_nodes.log
+	    mpiexec -machinefile ./allnodes -np $NODES_QUAN ./homework_pi_parallel.out $POINTS_QUANTITY >> parallel_strong_${NODES_QUAN}_nodes.log
+    done
+done
+for NODES_QUAN in {1..12..1}
+do
+    update_config_file
+    for i in {1..10..1}
+    do
+        echo ----- >> parallel_weak_${NODES_QUAN}_nodes.log
+	    mpiexec -machinefile ./allnodes -np $NODES_QUAN ./homework_pi_parallel.out $(($NODES_QUAN * $POINTS_QUANTITY)) >> parallel_weak_${NODES_QUAN}_nodes.log
     done
 done

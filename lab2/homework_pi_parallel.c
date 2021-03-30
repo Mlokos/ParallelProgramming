@@ -65,10 +65,11 @@ int main(int argc, char** argv) {
     printf("Run program with a points quantity argument!");
     exit(1);
   }
-  LLONG_UINT points_quantity = atoi(argv[1]);
+  char *ptr;
+  LLONG_UINT points_quantity = strtol(argv[1], &ptr, 10);
 
   LLONG_UINT points_quantity_splitted = points_quantity / (LLONG_UINT)size;
-  LLONG_UINT points_quantity_for_master = points_quantity_splitted + points_quantity % (LLONG_UINT)size;
+  LLONG_UINT points_quantity_for_master = points_quantity_splitted + (points_quantity % (LLONG_UINT)size);
 
   /**
    * Communication
