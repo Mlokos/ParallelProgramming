@@ -1,0 +1,150 @@
+-----
+Slave: 0.004057
+Slave: 0.004049
+Slave: 0.004055
+Slave: 0.004054
+Slave: 0.004064
+Slave: 0.004071
+Master: 0.004065
+Slave: 0.004073
+Slave: 0.004057
+Slave: 0.004045
+Slave: 0.004064
+Slave: 0.004063
+Calculated PI: 3.141232
+General: 0.005024
+-----
+Slave: 0.004069
+Slave: 0.004067
+Master: 0.004069
+Slave: 0.004055
+Slave: 0.004056
+Slave: 0.004057
+Slave: 0.004062
+Slave: 0.004060
+Slave: 0.004053
+Slave: 0.004060
+Slave: 0.004079
+Slave: 0.004121
+Calculated PI: 3.138664
+General: 0.009197
+-----
+Slave: 0.004043
+Slave: 0.004057
+Slave: 0.004053
+Slave: 0.004060
+Slave: 0.004060
+Slave: 0.004060
+Slave: 0.004045
+Slave: 0.004060
+Master: 0.004060
+Slave: 0.004053
+Slave: 0.004046
+Slave: 0.004110
+Calculated PI: 3.142196
+General: 0.008938
+-----
+Slave: 0.004050
+Slave: 0.004063
+Slave: 0.004064
+Slave: 0.004055
+Slave: 0.004064
+Slave: 0.004048
+Slave: 0.004068
+Slave: 0.004058
+Master: 0.004071
+Slave: 0.004056
+Slave: 0.004073
+Calculated PI: 3.142532
+General: 0.008556
+Slave: 0.004096
+-----
+Slave: 0.004041
+Master: 0.004041
+Slave: 0.004071
+Slave: 0.004069
+Slave: 0.004063
+Slave: 0.004043
+Slave: 0.004066
+Slave: 0.004057
+Slave: 0.004057
+Slave: 0.004093
+Slave: 0.004102
+Calculated PI: 3.143032
+General: 0.018285
+Slave: 0.004146
+-----
+Master: 0.004056
+Slave: 0.004057
+Slave: 0.004057
+Slave: 0.004060
+Slave: 0.004054
+Slave: 0.004061
+Slave: 0.004062
+Slave: 0.004059
+Slave: 0.004055
+Slave: 0.004063
+Slave: 0.004052
+Calculated PI: 3.141280
+General: 0.008618
+Slave: 0.004111
+-----
+Master: 0.004055
+Slave: 0.004061
+Slave: 0.004048
+Slave: 0.004060
+Slave: 0.004060
+Slave: 0.004055
+Slave: 0.004082
+Slave: 0.004064
+Slave: 0.004048
+Calculated PI: 3.141548
+General: 0.005253
+Slave: 0.004072
+Slave: 0.004057
+Slave: 0.004064
+-----
+Slave: 0.004066
+Slave: 0.004069
+Slave: 0.004058
+Master: 0.004069
+Slave: 0.004072
+Slave: 0.004077
+Slave: 0.004064
+Slave: 0.004101
+Slave: 0.004062
+Slave: 0.004060
+Slave: 0.004063
+Calculated PI: 3.141244
+General: 0.004768
+Slave: 0.004055
+-----
+Slave: 0.004056
+Master: 0.004055
+Slave: 0.004069
+Slave: 0.004562
+Slave: 0.004053
+Slave: 0.004047
+Slave: 0.004063
+Slave: 0.004049
+Slave: 0.004060
+Slave: 0.004048
+Calculated PI: 3.143240
+General: 0.008770
+Slave: 0.004066
+Slave: 0.004089
+-----
+Slave: 0.004055
+Slave: 0.004056
+Slave: 0.004045
+Slave: 0.004060
+Slave: 0.004064
+Slave: 0.004056
+Slave: 0.004066
+Slave: 0.004059
+Slave: 0.004054
+Master: 0.004047
+Slave: 0.004058
+Calculated PI: 3.143436
+General: 0.008256
+Slave: 0.004097

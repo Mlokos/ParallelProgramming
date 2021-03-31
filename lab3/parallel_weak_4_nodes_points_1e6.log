@@ -1,0 +1,70 @@
+-----
+Slave: 0.046913
+Slave: 0.047311
+Master: 0.048645
+Slave: 0.048962
+Calculated PI: 3.141941
+General: 0.049072
+-----
+Slave: 0.046982
+Slave: 0.047142
+Master: 0.046834
+Calculated PI: 3.141266
+General: 0.047323
+Slave: 0.047067
+-----
+Slave: 0.046621
+Master: 0.046893
+Calculated PI: 3.140774
+General: 0.047138
+Slave: 0.047036
+Slave: 0.046941
+-----
+Slave: 0.047005
+Slave: 0.046826
+Master: 0.046845
+Calculated PI: 3.141406
+General: 0.047337
+Slave: 0.046552
+-----
+Master: 0.046782
+Slave: 0.046844
+Slave: 0.048575
+Slave: 0.048823
+Calculated PI: 3.142559
+General: 0.049038
+-----
+Master: 0.046719
+Calculated PI: 3.143138
+General: 0.047376
+Slave: 0.046963
+Slave: 0.046791
+Slave: 0.047064
+-----
+Slave: 0.046640
+Slave: 0.046675
+Master: 0.046715
+Slave: 0.046796
+Calculated PI: 3.142502
+General: 0.046966
+-----
+Slave: 0.046507
+Slave: 0.046553
+Master: 0.046742
+Calculated PI: 3.140562
+General: 0.047104
+Slave: 0.046932
+-----
+Master: 0.047089
+Calculated PI: 3.142887
+General: 0.047442
+Slave: 0.046866
+Slave: 0.047379
+Slave: 0.046843
+-----
+Slave: 0.046819
+Slave: 0.046751
+Slave: 0.048167
+Master: 0.048685
+Calculated PI: 3.141854
+General: 0.048785
