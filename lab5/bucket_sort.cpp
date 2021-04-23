@@ -2,54 +2,35 @@
 #include <cstdlib>  // rand
 #include <omp.h>
 
-#define LL_UINT long long unsigned int
-#define UINT unsigned int
-
-
 // OPENMP
 // openmp tutorial (got some example code): https://hpc.llnl.gov/openmp-tutorial
 // how to use scheduling: http://jakascorner.com/blog/2016/06/omp-for-scheduling.html
 // htus part 2, code: https://github.com/jakaspeh/concurrency/blob/master/ompForSchedule.cpp
+// htus part 3: those links provided in laboratory are actually pretty fine
+// openmp sheduling for 'runtime' type, code: https://www.rookiehpc.com/openmp/docs/omp_set_schedule.php
 
 // BUCKET SORT
 // bucket sort algorithm: https://www.geeksforgeeks.org/bucket-sort-2/
 
 
-// below is a naive implementation; it works but is not in scope of the exercise
-// with openmp scheduling usage a 'fill_table' function will not be necessary
-void fill_table(int * table, LL_UINT table_size, UINT total_threads, UINT thread_id) {
-    LL_UINT elements_chunk = table_size / total_threads;
-    // add additional elements to the last thread if there were some inequalities
-    if(thread_id == total_threads - 1) {
-        UINT additional_elements = table_size % total_threads;
-        elements_chunk += additional_elements;
-    }
-    // iterate through elements
-    LL_UINT starting_element = (table_size / total_threads) * thread_id;
-    for(LL_UINT i = starting_element; i < starting_element + elements_chunk; ++i) {
-        table[i] = std::rand();
-    }
-}
+#define TABLE_SIZE 1024
 
 int main(int argc, char *argv[]) {
-    int nthreads, tid;
+    int to_fill_table[TABLE_SIZE];
+    // omp_set_schedule(omp_sched_dynamic, 2); // use only with 'runtime' schedule
 
-    int a[103];
-    for(int i = 0; i < 103; ++i) {
-        a[i] = 0;
-    }
-
-    #pragma omp parallel private(tid)
-    {
-        /* Obtain and print thread id */
-        tid = omp_get_thread_num();
-        nthreads = omp_get_num_threads();
-
-        fill_table(a, 103, nthreads, tid);
+    // different types of sheduling
+    #pragma omp parallel for shared(to_fill_table) schedule(static, 1)
+    // #pragma omp parallel for shared(to_fill_table) schedule(dynamic, 1)
+    // #pragma omp parallel for shared(to_fill_table) schedule(guided, 1)
+    // #pragma omp parallel for shared(to_fill_table) schedule(auto) // this one is without a second parameter; compiler is taking care of this and takes the best one
+    // #pragma omp parallel for shared(to_fill_table) schedule(runtime) // this one is also without a second parameter; 
+    for(int i = 0; i < TABLE_SIZE; ++i) {
+        to_fill_table[i] = rand();
     }
 
     // test
-    for(int i = 0; i < 103; ++i) {
-        std::cout << a[i] << std::endl;
+    for(int i = 0; i < TABLE_SIZE; ++i) {
+        std::cout << to_fill_table[i] << std::endl;
     }
  }
