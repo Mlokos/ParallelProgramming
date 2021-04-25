@@ -17,29 +17,29 @@
 
 void fill_table_static(std::vector<int> &table, int chunk_size) {
     #pragma omp parallel for shared(table) schedule(static, chunk_size)
-    for(auto &elem: table) {
-        elem = rand();
+    for(long long unsigned int i=0; i < table.size(); ++i) {
+        table[i] = rand();
     }
 }
 
 void fill_table_dynamic(std::vector<int> &table, int chunk_size) {
     #pragma omp parallel for shared(table) schedule(dynamic, chunk_size)
-    for(auto &elem: table) {
-        elem = rand();
+    for(long long unsigned int i=0; i < table.size(); ++i) {
+        table[i] = rand();
     }
 }
 
 void fill_table_guided(std::vector<int> &table, int chunk_size) {
     #pragma omp parallel for shared(table) schedule(guided, chunk_size)
-    for(auto &elem: table) {
-        elem = rand();
+    for(long long unsigned int i=0; i < table.size(); ++i) {
+        table[i] = rand();
     }
 }
 
 void fill_table_auto(std::vector<int> &table) {
     #pragma omp parallel for shared(table) schedule(auto)
-    for(auto &elem: table) {
-        elem = rand();
+    for(long long unsigned int i=0; i < table.size(); ++i) {
+        table[i] = rand();
     }
 }
 
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
     // test
     std::cout << to_fill_vector.size() << std::endl;
-    for(auto &elem: to_fill_vector) {
-        std::cout << elem << std::endl;
+    for(long long unsigned int i=0; i < to_fill_vector.size(); ++i) {
+        to_fill_vector[i] = rand();
     }
  }
