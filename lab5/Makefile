@@ -2,7 +2,7 @@ compile:
 	g++ -std=c++11 -Wall bucket_sort.cpp -o bucket_sort.out -fopenmp
 
 run:
-	./bucket_sort.out
+	./run_tests.sh
 
 x_clean:
 	rm *.out
