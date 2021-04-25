@@ -1,6 +1,9 @@
 #include <iostream> // cout
 #include <cstdlib>  // rand
+#include <vector>   // vector
 #include <omp.h>
+
+#define TABLE_SIZE 1024
 
 // OPENMP
 // openmp tutorial (got some example code): https://hpc.llnl.gov/openmp-tutorial
@@ -12,25 +15,42 @@
 // BUCKET SORT
 // bucket sort algorithm: https://www.geeksforgeeks.org/bucket-sort-2/
 
+void fill_table_static(std::vector<int> &table, int chunk_size) {
+    #pragma omp parallel for shared(table) schedule(static, chunk_size)
+    for(auto &elem: table) {
+        elem = rand();
+    }
+}
 
-#define TABLE_SIZE 1024
+void fill_table_dynamic(std::vector<int> &table, int chunk_size) {
+    #pragma omp parallel for shared(table) schedule(dynamic, chunk_size)
+    for(auto &elem: table) {
+        elem = rand();
+    }
+}
+
+void fill_table_guided(std::vector<int> &table, int chunk_size) {
+    #pragma omp parallel for shared(table) schedule(guided, chunk_size)
+    for(auto &elem: table) {
+        elem = rand();
+    }
+}
+
+void fill_table_auto(std::vector<int> &table) {
+    #pragma omp parallel for shared(table) schedule(auto)
+    for(auto &elem: table) {
+        elem = rand();
+    }
+}
 
 int main(int argc, char *argv[]) {
-    int to_fill_table[TABLE_SIZE];
-    // omp_set_schedule(omp_sched_dynamic, 2); // use only with 'runtime' schedule
+    std::vector<int> to_fill_vector(TABLE_SIZE);
 
-    // different types of sheduling
-    #pragma omp parallel for shared(to_fill_table) schedule(static, 1)
-    // #pragma omp parallel for shared(to_fill_table) schedule(dynamic, 1)
-    // #pragma omp parallel for shared(to_fill_table) schedule(guided, 1)
-    // #pragma omp parallel for shared(to_fill_table) schedule(auto) // this one is without a second parameter; compiler is taking care of this and takes the best one
-    // #pragma omp parallel for shared(to_fill_table) schedule(runtime) // this one is also without a second parameter; 
-    for(int i = 0; i < TABLE_SIZE; ++i) {
-        to_fill_table[i] = rand();
-    }
+    fill_table_static(to_fill_vector, 1);
 
     // test
-    for(int i = 0; i < TABLE_SIZE; ++i) {
-        std::cout << to_fill_table[i] << std::endl;
+    std::cout << to_fill_vector.size() << std::endl;
+    for(auto &elem: to_fill_vector) {
+        std::cout << elem << std::endl;
     }
  }
