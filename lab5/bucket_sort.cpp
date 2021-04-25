@@ -5,7 +5,7 @@
  */
 
 #include <iostream> // cout
-#include <cstdlib>  // rand
+#include <random>   // uniform_real_distribution
 #include <vector>   // vector
 #include <chrono>   // time
 #include <omp.h>
@@ -24,12 +24,14 @@ int main(int argc, char *argv[]) {
     char *ptr;
     LLONG_UINT vector_size = strtol(argv[1], &ptr, 10);
 
-    std::vector<int> to_fill_vector(vector_size);
+    std::vector<float> to_fill_vector(vector_size);
+    std::mt19937 gen;
+    std::uniform_real_distribution<float> prob(0.0, 1.0);
 
     auto start_time = std::chrono::high_resolution_clock::now();
     #pragma omp parallel for shared(to_fill_vector) schedule(runtime)
     for(LLONG_UINT i=0; i < to_fill_vector.size(); ++i) {
-        to_fill_vector[i] = rand();
+        to_fill_vector[i] = prob(gen);
     }
     auto end_time = std::chrono::high_resolution_clock::now();
 
