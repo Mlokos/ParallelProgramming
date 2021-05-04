@@ -1,60 +1,60 @@
 -------
-bucket_split_time 385353
-bucket_sort_time 718153
-bucket_to_array_time 7
-table_fill_time 142762
-program_time 1257223
+bucket_split_time 384046
+bucket_sort_time 699428
+bucket_to_array_time 21690
+table_fill_time 126301
+program_time 1241935
 -------
-bucket_split_time 394310
-bucket_sort_time 657095
-bucket_to_array_time 33
-table_fill_time 137867
-program_time 1199997
+bucket_split_time 396970
+bucket_sort_time 666385
+bucket_to_array_time 19561
+table_fill_time 141824
+program_time 1241224
 -------
-bucket_split_time 388108
-bucket_sort_time 645162
-bucket_to_array_time 11
-table_fill_time 125736
-program_time 1169873
+bucket_split_time 381185
+bucket_sort_time 667693
+bucket_to_array_time 22498
+table_fill_time 123286
+program_time 1206805
 -------
-bucket_split_time 385110
-bucket_sort_time 640972
-bucket_to_array_time 7
-table_fill_time 125124
-program_time 1163425
+bucket_split_time 377053
+bucket_sort_time 672489
+bucket_to_array_time 19513
+table_fill_time 123584
+program_time 1203313
 -------
-bucket_split_time 383664
-bucket_sort_time 642296
-bucket_to_array_time 8
-table_fill_time 125405
-program_time 1163569
+bucket_split_time 377046
+bucket_sort_time 711477
+bucket_to_array_time 19601
+table_fill_time 124778
+program_time 1245359
 -------
-bucket_split_time 380530
-bucket_sort_time 640904
-bucket_to_array_time 7
-table_fill_time 123427
-program_time 1157097
+bucket_split_time 382512
+bucket_sort_time 688724
+bucket_to_array_time 19619
+table_fill_time 144535
+program_time 1247579
 -------
-bucket_split_time 361295
-bucket_sort_time 691072
-bucket_to_array_time 7
-table_fill_time 124306
-program_time 1189222
+bucket_split_time 393984
+bucket_sort_time 673105
+bucket_to_array_time 22269
+table_fill_time 127807
+program_time 1229410
 -------
-bucket_split_time 388432
-bucket_sort_time 654774
-bucket_to_array_time 36
-table_fill_time 132954
-program_time 1186821
+bucket_split_time 369151
+bucket_sort_time 659554
+bucket_to_array_time 20950
+table_fill_time 125063
+program_time 1185567
 -------
-bucket_split_time 392149
-bucket_sort_time 646695
-bucket_to_array_time 10
-table_fill_time 128172
-program_time 1177776
+bucket_split_time 397875
+bucket_sort_time 688992
+bucket_to_array_time 19533
+table_fill_time 124060
+program_time 1242629
 -------
-bucket_split_time 372597
-bucket_sort_time 710381
-bucket_to_array_time 8
-table_fill_time 130086
-program_time 1225487
+bucket_split_time 384168
+bucket_sort_time 694764
+bucket_to_array_time 25055
+table_fill_time 141765
+program_time 1256300

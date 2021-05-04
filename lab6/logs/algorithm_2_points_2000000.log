@@ -1,60 +1,60 @@
 -------
-bucket_split_time 198189
-bucket_sort_time 323110
-bucket_to_array_time 6466
-table_fill_time 69019
-program_time 602228
+bucket_split_time 175227
+bucket_sort_time 351737
+bucket_to_array_time 10079
+table_fill_time 70990
+program_time 613552
 -------
-bucket_split_time 189146
-bucket_sort_time 305381
-bucket_to_array_time 8
-table_fill_time 83591
-program_time 587155
+bucket_split_time 160945
+bucket_sort_time 325818
+bucket_to_array_time 9827
+table_fill_time 66572
+program_time 569853
 -------
-bucket_split_time 196020
-bucket_sort_time 335421
-bucket_to_array_time 27
-table_fill_time 62702
-program_time 599859
+bucket_split_time 198670
+bucket_sort_time 316731
+bucket_to_array_time 9776
+table_fill_time 64041
+program_time 595835
 -------
-bucket_split_time 194866
-bucket_sort_time 322066
-bucket_to_array_time 8
-table_fill_time 66111
-program_time 588494
+bucket_split_time 194476
+bucket_sort_time 321463
+bucket_to_array_time 9800
+table_fill_time 74966
+program_time 606229
 -------
-bucket_split_time 186544
-bucket_sort_time 325649
-bucket_to_array_time 7
-table_fill_time 66280
-program_time 585173
+bucket_split_time 193096
+bucket_sort_time 319749
+bucket_to_array_time 9822
+table_fill_time 64856
+program_time 592996
 -------
-bucket_split_time 197529
-bucket_sort_time 315507
-bucket_to_array_time 7
-table_fill_time 63906
-program_time 582352
+bucket_split_time 199744
+bucket_sort_time 319816
+bucket_to_array_time 9921
+table_fill_time 65247
+program_time 600479
 -------
-bucket_split_time 199073
-bucket_sort_time 309411
-bucket_to_array_time 7
-table_fill_time 63087
-program_time 580392
+bucket_split_time 177338
+bucket_sort_time 313267
+bucket_to_array_time 9817
+table_fill_time 61216
+program_time 567181
 -------
-bucket_split_time 186986
-bucket_sort_time 306404
-bucket_to_array_time 8
-table_fill_time 61550
-program_time 561597
+bucket_split_time 186315
+bucket_sort_time 311791
+bucket_to_array_time 9795
+table_fill_time 63633
+program_time 578274
 -------
-bucket_split_time 178527
-bucket_sort_time 320986
-bucket_to_array_time 26
-table_fill_time 62821
-program_time 567879
+bucket_split_time 193323
+bucket_sort_time 322646
+bucket_to_array_time 9801
+table_fill_time 63548
+program_time 594670
 -------
-bucket_split_time 171771
-bucket_sort_time 333735
-bucket_to_array_time 7
-table_fill_time 72114
-program_time 583115
+bucket_split_time 200476
+bucket_sort_time 318734
+bucket_to_array_time 9817
+table_fill_time 74333
+program_time 608790
