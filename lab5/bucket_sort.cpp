@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
     std::uniform_real_distribution<float> prob(0.0, 1.0);
 
     auto start_time = std::chrono::high_resolution_clock::now();
+    omp_set_dynamic(0);
+    omp_set_num_threads(4);
     #pragma omp parallel for shared(to_fill_vector) schedule(runtime)
     for(LLONG_UINT i=0; i < to_fill_vector.size(); ++i) {
         to_fill_vector[i] = prob(gen);
