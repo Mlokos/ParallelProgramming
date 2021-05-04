@@ -100,12 +100,9 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int n)
     
     #pragma omp parallel
     {
-        for(int thread_number = 0; thread_number < n; ++thread_number){
-            if(omp_get_thread_num() == thread_number) {
-                for (LLONG_UINT table_it = bucket_sizes[thread_number]; table_it < bucket_sizes[thread_number + 1]; ++table_it) {
-                    arr[table_it] = b[thread_number][table_it - bucket_sizes[thread_number]];
-                }
-            }
+        int thread_number = omp_get_thread_num();
+        for (LLONG_UINT table_it = bucket_sizes[thread_number]; table_it < bucket_sizes[thread_number + 1]; ++table_it) {
+            arr[table_it] = b[thread_number][table_it - bucket_sizes[thread_number]];
         }
     }
     auto bucket_to_array_end = std::chrono::high_resolution_clock::now();
