@@ -1,0 +1,60 @@
+-------
+bucket_split_time 110002
+bucket_sort_time 1700543
+bucket_to_array_time 29106
+table_fill_time 123717
+program_time 1973766
+-------
+bucket_split_time 110960
+bucket_sort_time 1686367
+bucket_to_array_time 29080
+table_fill_time 125070
+program_time 1961795
+-------
+bucket_split_time 110886
+bucket_sort_time 1665212
+bucket_to_array_time 29602
+table_fill_time 124310
+program_time 1940166
+-------
+bucket_split_time 113697
+bucket_sort_time 1683432
+bucket_to_array_time 28968
+table_fill_time 124389
+program_time 1960923
+-------
+bucket_split_time 110008
+bucket_sort_time 1678913
+bucket_to_array_time 28925
+table_fill_time 127221
+program_time 1955161
+-------
+bucket_split_time 111289
+bucket_sort_time 1710004
+bucket_to_array_time 29164
+table_fill_time 124938
+program_time 1986080
+-------
+bucket_split_time 110626
+bucket_sort_time 1674191
+bucket_to_array_time 29754
+table_fill_time 128919
+program_time 1954239
+-------
+bucket_split_time 111580
+bucket_sort_time 1690817
+bucket_to_array_time 29691
+table_fill_time 126693
+program_time 1969292
+-------
+bucket_split_time 109916
+bucket_sort_time 1735031
+bucket_to_array_time 33076
+table_fill_time 122961
+program_time 2011109
+-------
+bucket_split_time 132421
+bucket_sort_time 1828828
+bucket_to_array_time 29026
+table_fill_time 157231
+program_time 2189919

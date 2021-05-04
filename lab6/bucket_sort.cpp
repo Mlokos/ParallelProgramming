@@ -140,6 +140,9 @@ int main(int argc, char *argv[]) {
     std::mt19937 gen;
     std::uniform_real_distribution<float> prob(0.0, 1.0);
 
+    // Indicate start of the program iteration
+    std::cout << "-------" << std::endl;
+
     auto program_start_time = std::chrono::high_resolution_clock::now();
     #pragma omp parallel for shared(to_fill_vector) schedule(runtime)
     for(LLONG_UINT i=0; i < to_fill_vector.size(); ++i) {

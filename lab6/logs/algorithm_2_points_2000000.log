@@ -1,0 +1,60 @@
+-------
+bucket_split_time 198189
+bucket_sort_time 323110
+bucket_to_array_time 6466
+table_fill_time 69019
+program_time 602228
+-------
+bucket_split_time 189146
+bucket_sort_time 305381
+bucket_to_array_time 8
+table_fill_time 83591
+program_time 587155
+-------
+bucket_split_time 196020
+bucket_sort_time 335421
+bucket_to_array_time 27
+table_fill_time 62702
+program_time 599859
+-------
+bucket_split_time 194866
+bucket_sort_time 322066
+bucket_to_array_time 8
+table_fill_time 66111
+program_time 588494
+-------
+bucket_split_time 186544
+bucket_sort_time 325649
+bucket_to_array_time 7
+table_fill_time 66280
+program_time 585173
+-------
+bucket_split_time 197529
+bucket_sort_time 315507
+bucket_to_array_time 7
+table_fill_time 63906
+program_time 582352
+-------
+bucket_split_time 199073
+bucket_sort_time 309411
+bucket_to_array_time 7
+table_fill_time 63087
+program_time 580392
+-------
+bucket_split_time 186986
+bucket_sort_time 306404
+bucket_to_array_time 8
+table_fill_time 61550
+program_time 561597
+-------
+bucket_split_time 178527
+bucket_sort_time 320986
+bucket_to_array_time 26
+table_fill_time 62821
+program_time 567879
+-------
+bucket_split_time 171771
+bucket_sort_time 333735
+bucket_to_array_time 7
+table_fill_time 72114
+program_time 583115

@@ -1,0 +1,60 @@
+-------
+bucket_split_time 221110
+bucket_sort_time 3592402
+bucket_to_array_time 67555
+table_fill_time 309795
+program_time 4221429
+-------
+bucket_split_time 220835
+bucket_sort_time 3587902
+bucket_to_array_time 87428
+table_fill_time 265061
+program_time 4183659
+-------
+bucket_split_time 222333
+bucket_sort_time 3624463
+bucket_to_array_time 58099
+table_fill_time 336912
+program_time 4262711
+-------
+bucket_split_time 221643
+bucket_sort_time 3518664
+bucket_to_array_time 58032
+table_fill_time 246384
+program_time 4064532
+-------
+bucket_split_time 220334
+bucket_sort_time 3525562
+bucket_to_array_time 58647
+table_fill_time 252198
+program_time 4076813
+-------
+bucket_split_time 222258
+bucket_sort_time 3532256
+bucket_to_array_time 58694
+table_fill_time 245906
+program_time 4079418
+-------
+bucket_split_time 217872
+bucket_sort_time 3533948
+bucket_to_array_time 58663
+table_fill_time 248927
+program_time 4079609
+-------
+bucket_split_time 219546
+bucket_sort_time 3578254
+bucket_to_array_time 58157
+table_fill_time 247815
+program_time 4126910
+-------
+bucket_split_time 218153
+bucket_sort_time 3536623
+bucket_to_array_time 57810
+table_fill_time 259365
+program_time 4091865
+-------
+bucket_split_time 218783
+bucket_sort_time 3673970
+bucket_to_array_time 69201
+table_fill_time 250193
+program_time 4235233
