@@ -15,6 +15,7 @@
 
 
 // source: https://www.geeksforgeeks.org/bucket-sort-2/
+// author: Michal Sokol
 // Function to sort arr[] of
 // size n using bucket sort
 std::vector<float> bucketSort(std::vector<float> arr, int n)
@@ -50,11 +51,11 @@ std::vector<float> bucketSort(std::vector<float> arr, int n)
     
     #pragma omp parallel
     {
-        for(int i = 0; i < n; ++i){
-            if(omp_get_thread_num() == i) {
-                for (int j = bucket_sizes[i]; j < bucket_sizes[i]; ++j) {
-                    for (int a = 0; a < b[i].size(); ++a) {
-                        arr[j + a] = b[i][a];
+        for(int thread_number = 0; thread_number < n; ++thread_number){
+            if(omp_get_thread_num() == thread_number) {
+                for (LLONG_UINT table_it = bucket_sizes[thread_number]; table_it < bucket_sizes[thread_number]; ++table_it) {
+                    for (LLONG_UINT bucket_it = 0; bucket_it < b[thread_number].size(); ++bucket_it) {
+                        arr[table_it + bucket_it] = b[thread_number][bucket_it];
                     }
                 }
             }
@@ -93,7 +94,7 @@ int main(int argc, char *argv[]) {
     }
 
     auto start_time = std::chrono::high_resolution_clock::now();
-    to_fill_vector = bucketSort(to_fill_vector, 4);
+    to_fill_vector = bucketSort(to_fill_vector, available_threads);
     auto end_time = std::chrono::high_resolution_clock::now();
 
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
