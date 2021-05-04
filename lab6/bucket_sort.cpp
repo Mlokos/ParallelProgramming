@@ -24,21 +24,36 @@ std::vector<float> bucketSort_0(std::vector<float> arr, int n)
 
     // 2) Put array elements
     // in different buckets
+    auto bucket_split_start = std::chrono::high_resolution_clock::now();
     for (LLONG_UINT i = 0; i < arr.size(); i++) {
         int bi = n * arr[i]; // Index in bucket
         b[bi].push_back(arr[i]);
     }
+    auto bucket_split_end = std::chrono::high_resolution_clock::now();
  
     // 3) Sort individual buckets
+    auto bucket_sort_start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < n; i++)
         std::sort(b[i].begin(), b[i].end());
+    auto bucket_sort_end = std::chrono::high_resolution_clock::now();
  
     // 4) Concatenate all buckets into arr[]
+    auto bucket_to_array_start = std::chrono::high_resolution_clock::now();
     LLONG_UINT index = 0;
     for (int i = 0; i < n; i++)
         for (LLONG_UINT j = 0; j < b[i].size(); j++)
             arr[index++] = b[i][j];
     
+    auto bucket_to_array_end = std::chrono::high_resolution_clock::now();
+
+    auto bucket_split_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_split_end - bucket_split_start);
+    auto bucket_sort_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_sort_end - bucket_sort_start);
+    auto bucket_to_array_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_to_array_end - bucket_to_array_start);
+    
+    std::cout << "bucket_split_time " << bucket_split_duration.count() << std::endl;
+    std::cout << "bucket_sort_time " << bucket_sort_duration.count() << std::endl;
+    std::cout << "bucket_to_array_time " << bucket_to_array_duration.count() << std::endl;
+
     return arr;
 }
 
@@ -54,20 +69,25 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int n)
  
     // 2) Put array elements
     // in different buckets
+    auto bucket_split_start = std::chrono::high_resolution_clock::now();
     #pragma omp parallel for schedule(runtime)
     for (LLONG_UINT i = 0; i < arr.size(); ++i) {
         int bi = n * arr[i]; // Index in bucket
         #pragma omp critical
         b[bi].push_back(arr[i]);
     }
+    auto bucket_split_end = std::chrono::high_resolution_clock::now();
  
     // 3) Sort individual buckets
+    auto bucket_sort_start = std::chrono::high_resolution_clock::now();
     #pragma omp parallel
     {
         std::sort(b[omp_get_thread_num()].begin(), b[omp_get_thread_num()].end());
     }
+    auto bucket_sort_end = std::chrono::high_resolution_clock::now();
 
     // 4) Concatenate all buckets into arr[]
+    auto bucket_to_array_start = std::chrono::high_resolution_clock::now();
     std::vector<LLONG_UINT> bucket_sizes;
     for(int i = 0; i < n; ++i) {
         if(i > 0) {
@@ -90,6 +110,15 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int n)
             }
         }
     }
+    auto bucket_to_array_end = std::chrono::high_resolution_clock::now();
+
+    auto bucket_split_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_split_end - bucket_split_start);
+    auto bucket_sort_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_sort_end - bucket_sort_start);
+    auto bucket_to_array_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_to_array_end - bucket_to_array_start);
+    
+    std::cout << "bucket_split_time " << bucket_split_duration.count() << std::endl;
+    std::cout << "bucket_sort_time " << bucket_sort_duration.count() << std::endl;
+    std::cout << "bucket_to_array_time " << bucket_to_array_duration.count() << std::endl;
 
     return arr;
 }
@@ -111,10 +140,12 @@ int main(int argc, char *argv[]) {
     std::mt19937 gen;
     std::uniform_real_distribution<float> prob(0.0, 1.0);
 
+    auto program_start_time = std::chrono::high_resolution_clock::now();
     #pragma omp parallel for shared(to_fill_vector) schedule(runtime)
     for(LLONG_UINT i=0; i < to_fill_vector.size(); ++i) {
         to_fill_vector[i] = prob(gen);
     }
+    auto fill_table_end_time = std::chrono::high_resolution_clock::now();
 
     int available_threads;
     #pragma omp parallel
@@ -123,7 +154,6 @@ int main(int argc, char *argv[]) {
             available_threads = omp_get_num_threads();
     }
 
-    auto start_time = std::chrono::high_resolution_clock::now();
     switch(algorithm_type) {
         case 0:
             to_fill_vector = bucketSort_0(to_fill_vector, available_threads);
@@ -134,10 +164,13 @@ int main(int argc, char *argv[]) {
         default:
             std::cout << "No such algorithm!\n";
     }
-    auto end_time = std::chrono::high_resolution_clock::now();
+    auto program_end_time = std::chrono::high_resolution_clock::now();
 
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
-    std::cout << duration.count() << std::endl;
+    auto fill_table_duration = std::chrono::duration_cast<std::chrono::microseconds>(fill_table_end_time - program_start_time);
+    auto program_duration = std::chrono::duration_cast<std::chrono::microseconds>(program_end_time - program_start_time);
+
+    std::cout << "table_fill_time " << fill_table_duration.count() << std::endl;
+    std::cout << "program_time " << program_duration.count() << std::endl;
 
     return 0;
  }
