@@ -1,9 +1,0 @@
-time hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -files mapper.py, reducer.py -mapper mapper.py -reducer reducer.py -input books-input -output books-output
-
-#!/bin/bash
-for i in {1..2000}
-do
-    wget "http://www.gutenberg.org/files/$i/$i.txt"
-    wget "http://www.gutenberg.org/files/$i/$i-0.txt"
-done
-
