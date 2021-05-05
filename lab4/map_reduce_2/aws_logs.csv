@@ -1,13 +1,13 @@
-instance type,cluster size (include master),problem size,exec time,sequential
-c4.xlarge,3,100,3m39.89s,4.56s
-c4.xlarge,3,2000,58m33.39s,1m31.89s
-c4.xlarge,5,100,2m15.55s,4.25s
-c4.xlarge,5,2000,38m5.54s,1m27.63s
-c4.xlarge,7,100,1m34.67s,4.41s
-c4.xlarge,7,2000,26m6.51s,1m28.23s
-m5.xlarge,3,100,3m18.88s,4.55s
-m5.xlarge,3,2000,54m22.98s,1m23.87s
-m5.xlarge,5,100,2m5.95s,4.61s
-m5.xlarge,5,2000,42m29.98s,1m26.22s
-m5.xlarge,7,100,1m36.30s,4.42s
-m5.xlarge,7,2000,23m54.02s,1m27.46s
+instance type,cluster size (include master),problem size [MB],exec time,sequential
+c4.xlarge,3,65,3m39.89s,4.56s
+c4.xlarge,3,1200,58m33.39s,1m31.89s
+c4.xlarge,5,65,2m15.55s,4.25s
+c4.xlarge,5,1200,38m5.54s,1m27.63s
+c4.xlarge,7,65,1m34.67s,4.41s
+c4.xlarge,7,1200,26m6.51s,1m28.23s
+m5.xlarge,3,65,3m18.88s,4.55s
+m5.xlarge,3,1200,54m22.98s,1m23.87s
+m5.xlarge,5,65,2m5.95s,4.61s
+m5.xlarge,5,1200,42m29.98s,1m26.22s
+m5.xlarge,7,65,1m36.30s,4.42s
+m5.xlarge,7,1200,23m54.02s,1m27.46s
