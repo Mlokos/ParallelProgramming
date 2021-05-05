@@ -13,6 +13,12 @@
 
 #define LLONG_UINT unsigned long long int
 
+std::vector<std::vector<std::vector<float>>> createBucketsForThread(int n) {
+    std::vector<float> bucket;
+    std::vector<std::vector<float>> buckets(n, bucket);
+    std::vector<std::vector<std::vector<float>>> thread_buckets(4, buckets);
+    return thread_buckets;
+}
 
 // source: https://www.geeksforgeeks.org/bucket-sort-2/
 // Function to sort arr[] of
@@ -57,6 +63,92 @@ std::vector<float> bucketSort_0(std::vector<float> arr, int n)
     return arr;
 }
 
+std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int n) {
+    // 1) Create n empty buckets for every thread
+    std::vector<std::vector<std::vector<float>>> thread_buckets = createBucketsForThread(numberOfThreads);
+
+    // range for thread
+    float interval = float(1) / (numberOfThreads * n);
+
+    // Insert numberes to buckets
+    auto bucket_split_start = std::chrono::high_resolution_clock::now();
+    #pragma omp parallel 
+    {
+        int threadId = omp_get_thread_num();
+        float minValue = (float(1) * threadId) / numberOfThreads;
+        // set starting point different for every thread
+        LLONG_UINT startIndex = arr.size() / (threadId + 1);
+        float number;
+
+        #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
+        for (LLONG_UINT i=0; i<arr.size(); i++) {
+            number = arr[(i+startIndex)%arr.size()];
+            for (int j=0; j<n; j++) {
+                if (number >= (minValue + j*interval) && number < (minValue + (j+1)*interval)) {
+                    thread_buckets[threadId][j].push_back(number);
+                    break;
+                }
+            }
+        }
+    }
+    auto bucket_split_end = std::chrono::high_resolution_clock::now();
+
+    // Sort individual buckets
+    auto bucket_sort_start = std::chrono::high_resolution_clock::now();
+    #pragma omp parallel 
+    {
+        int threadId = omp_get_thread_num();
+        #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
+        for (int j=0; j<n; j++) {
+            std::sort(thread_buckets[threadId][j].begin(), thread_buckets[threadId][j].end());
+        }
+    }
+    
+    auto bucket_sort_end = std::chrono::high_resolution_clock::now();
+        
+    // Before writing to input array wait until all threads read an array and filled buckets
+    #pragma omp barrier
+
+    auto bucket_to_array_start = std::chrono::high_resolution_clock::now();
+    // Get start indexes in input array for threads
+    LLONG_UINT bucket_size;
+    std::vector<LLONG_UINT> arr_indexes (numberOfThreads);
+    for(int i = 0; i < numberOfThreads; i++) arr_indexes[i] = 0;
+
+    for(int i = 0; i < numberOfThreads; i++) {
+        for(int j = 0; j < n; j++) {
+            bucket_size = thread_buckets[i][j].size();
+            for(int k = i + 1; k < numberOfThreads; k++) {
+                arr_indexes[k] += bucket_size;
+            }
+        }
+    }
+
+    // Write buckets into input array
+    std::vector<float>::iterator it;
+    LLONG_UINT startIndex;
+    #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
+    for(int i = 0; i < numberOfThreads; i++) {
+        startIndex = (i == 0) ? 0 : arr_indexes[i];
+        it = arr.begin() + startIndex;
+        for(int j = 0; j < n; j++) {
+            std::copy(thread_buckets[i][j].begin(), thread_buckets[i][j].end(), it);
+            it += thread_buckets[i][j].size();
+        }
+    }
+
+    auto bucket_to_array_end = std::chrono::high_resolution_clock::now();
+
+    auto bucket_split_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_split_end - bucket_split_start);
+    auto bucket_sort_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_sort_end - bucket_sort_start);
+    auto bucket_to_array_duration = std::chrono::duration_cast<std::chrono::microseconds>(bucket_to_array_end - bucket_to_array_start);
+    
+    std::cout << "bucket_split_time " << (double)bucket_split_duration.count()/1000000 << " [s]"  << std::endl;
+    std::cout << "bucket_sort_time " << (double)bucket_sort_duration.count()/1000000 << " [s]"  << std::endl;
+    std::cout << "bucket_to_array_time " << (double)bucket_to_array_duration.count()/1000000 << " [s]"  << std::endl;
+
+    return arr;
+}
 
 // source: https://www.geeksforgeeks.org/bucket-sort-2/
 // author: Michal Sokol
@@ -155,6 +247,9 @@ int main(int argc, char *argv[]) {
     switch(algorithm_type) {
         case 0:
             to_fill_vector = bucketSort_0(to_fill_vector, available_threads);
+            break;
+        case 1:
+            to_fill_vector = bucketSort_1(to_fill_vector, available_threads, 4);
             break;
         case 2:
             to_fill_vector = bucketSort_2(to_fill_vector, available_threads);
