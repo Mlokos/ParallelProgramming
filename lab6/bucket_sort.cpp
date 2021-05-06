@@ -64,13 +64,13 @@ std::vector<float> bucketSort_0(std::vector<float> arr, int n)
 }
 
 std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int n) {
-    // 1) Create n empty buckets for every thread
+    // Create n empty buckets for every thread
     std::vector<std::vector<std::vector<float>>> thread_buckets = createBucketsForThread(numberOfThreads);
 
-    // range for thread
+    // range for one bucket
     float interval = float(1) / (numberOfThreads * n);
 
-    // Insert numberes to buckets
+    // Fill the buckets 
     auto bucket_split_start = std::chrono::high_resolution_clock::now();
     #pragma omp parallel 
     {
@@ -80,7 +80,6 @@ std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int
         LLONG_UINT startIndex = arr.size() / (threadId + 1);
         float number;
 
-        #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
         for (LLONG_UINT i=0; i<arr.size(); i++) {
             number = arr[(i+startIndex)%arr.size()];
             for (int j=0; j<n; j++) {
@@ -98,14 +97,12 @@ std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int
     #pragma omp parallel 
     {
         int threadId = omp_get_thread_num();
-        #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
         for (int j=0; j<n; j++) {
             std::sort(thread_buckets[threadId][j].begin(), thread_buckets[threadId][j].end());
         }
     }
-    
     auto bucket_sort_end = std::chrono::high_resolution_clock::now();
-        
+
     // Before writing to input array wait until all threads read an array and filled buckets
     #pragma omp barrier
 
@@ -125,15 +122,17 @@ std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int
     }
 
     // Write buckets into input array
-    std::vector<float>::iterator it;
     LLONG_UINT startIndex;
-    #pragma omp parallel for shared(arr, thread_buckets) schedule(runtime)
-    for(int i = 0; i < numberOfThreads; i++) {
-        startIndex = (i == 0) ? 0 : arr_indexes[i];
-        it = arr.begin() + startIndex;
+    #pragma omp parallel private(startIndex)
+    {
+        int threadId = omp_get_thread_num();
+        startIndex = (threadId == 0) ? 0 : arr_indexes[threadId];
+
         for(int j = 0; j < n; j++) {
-            std::copy(thread_buckets[i][j].begin(), thread_buckets[i][j].end(), it);
-            it += thread_buckets[i][j].size();
+            for(std::vector<float>::iterator it = thread_buckets[threadId][j].begin(); it != thread_buckets[threadId][j].end(); ++it) {
+                arr[startIndex] = *it;
+                startIndex++;
+            }
         }
     }
 
