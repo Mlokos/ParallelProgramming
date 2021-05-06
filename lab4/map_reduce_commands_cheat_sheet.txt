@@ -1,0 +1,20 @@
+mkdir books
+
+hdfs dfs -mkdir books-input
+hdfs dfs -put *.txt books-input
+
+time hadoop jar /usr/lib/hadoop/hadoop-streaming.jar -files mapper.py,reducer.py -mapper mapper.py -reducer reducer.py -input books-input -output books-output
+
+#!/bin/bash
+for i in {1..2000}
+do
+    wget "http://www.gutenberg.org/files/$i/$i.txt"
+    wget "http://www.gutenberg.org/files/$i/$i-0.txt"
+done
+
+touch mapper.py reducer.py sequential_mr.py
+
+chmod u+x mapper.py
+chmod u+x reducer.py
+
+hdfs dfs -rm -r books-output
