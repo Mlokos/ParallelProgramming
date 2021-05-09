@@ -26,7 +26,7 @@ std::vector<std::vector<std::vector<float>>> createBucketsForThread(int n) {
 std::vector<float> bucketSort_0(std::vector<float> arr, int n)
 {    
     // 1) Create n empty buckets
-    std::vector<float> b[n];
+    std::vector<std::vector<float>> b(n);
 
     // 2) Put array elements
     // in different buckets
@@ -156,16 +156,22 @@ std::vector<float> bucketSort_1(std::vector<float> arr, int numberOfThreads, int
 std::vector<float> bucketSort_2(std::vector<float> arr, int n)
 {
     // 1) Create n empty buckets
-    std::vector<float> b[n];
+    std::vector<std::vector<float>> b(n);
  
     // 2) Put array elements
     // in different buckets
     auto bucket_split_start = std::chrono::high_resolution_clock::now();
+    std::vector<std::vector<float>> thread_bucket(n);
+    std::vector<std::vector<std::vector<float>>> all_thread_buckets(n, thread_bucket);
     #pragma omp parallel for schedule(runtime)
     for (LLONG_UINT i = 0; i < arr.size(); ++i) {
         int bi = n * arr[i]; // Index in bucket
-        #pragma omp critical
-        b[bi].push_back(arr[i]);
+        all_thread_buckets[omp_get_thread_num()][bi].push_back(arr[i]);
+    }
+    for(int thread_num = 0; thread_num < n; ++thread_num) {
+        for(int i = 0; i < n; ++i) {
+            b[i].insert(b[i].end(), all_thread_buckets[thread_num][i].begin(), all_thread_buckets[thread_num][i].end());
+        }
     }
     auto bucket_split_end = std::chrono::high_resolution_clock::now();
  
@@ -176,6 +182,9 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int n)
         std::sort(b[omp_get_thread_num()].begin(), b[omp_get_thread_num()].end());
     }
     auto bucket_sort_end = std::chrono::high_resolution_clock::now();
+
+    // Before writing to input array wait until all threads read an array and filled buckets
+    #pragma omp barrier
 
     // 4) Concatenate all buckets into arr[]
     auto bucket_to_array_start = std::chrono::high_resolution_clock::now();
@@ -263,6 +272,10 @@ int main(int argc, char *argv[]) {
 
     std::cout << "table_fill_time " << (double)fill_table_duration.count()/1000000 << " [s]" << std::endl;
     std::cout << "program_time " << (double)program_duration.count()/1000000 << " [s]" << std::endl;
+
+    // for (auto elem : to_fill_vector) {
+    //     std::cout << elem << std::endl;
+    // }
 
     return 0;
  }
