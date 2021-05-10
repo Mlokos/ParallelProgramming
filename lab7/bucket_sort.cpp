@@ -177,7 +177,7 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int number_of_threads, i
  
     // 3) Sort individual buckets
     auto bucket_sort_start = std::chrono::high_resolution_clock::now();
-    #pragma omp parallel for schedule(runtime)
+    #pragma omp parallel for
     for (int i = 0; i < buckets_quan; ++ i) {
         std::sort(b[i].begin(), b[i].end());
     }
@@ -198,7 +198,7 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int number_of_threads, i
     }
     bucket_sizes.insert(bucket_sizes.begin(), 0);
     
-    #pragma omp parallel for schedule(runtime)
+    #pragma omp parallel for
     for(int bucket_number = 0; bucket_number < buckets_quan; ++bucket_number) {
         for (LLONG_UINT table_it = bucket_sizes[bucket_number]; table_it < bucket_sizes[bucket_number + 1]; ++table_it) {
             arr[table_it] = b[bucket_number][table_it - bucket_sizes[bucket_number]];
