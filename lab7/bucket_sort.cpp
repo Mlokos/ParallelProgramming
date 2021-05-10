@@ -222,14 +222,15 @@ int main(int argc, char *argv[]) {
     /**
     * Arguments handle
     */
-    if(argc != 4) {
-        printf("Run program with a points quantity argument [1], algorithm type [2] and buckets quantity [3]!\n");
+    if(argc != 5) {
+        printf("Run program with a points quantity argument [1], algorithm type [2], buckets quantity [3] and threads quantity [4]!\n");
         exit(1);
     }
     char *ptr;
     LLONG_UINT vector_size = strtol(argv[1], &ptr, 10);
     int algorithm_type = atoi(argv[2]);
     int buckets_quan = atoi(argv[3]);
+    int threads_quan = atoi(argv[4]);
 
     std::vector<float> to_fill_vector(vector_size);
     std::mt19937 gen;
@@ -245,22 +246,17 @@ int main(int argc, char *argv[]) {
     }
     auto fill_table_end_time = std::chrono::high_resolution_clock::now();
 
-    int available_threads;
-    #pragma omp parallel
-    {
-        if(omp_get_thread_num() == 0)
-            available_threads = omp_get_num_threads();
-    }
+    omp_set_num_threads(threads_quan);
 
     switch(algorithm_type) {
         case 0:
-            to_fill_vector = bucketSort_0(to_fill_vector, available_threads);
+            to_fill_vector = bucketSort_0(to_fill_vector, threads_quan);
             break;
         case 1:
-            to_fill_vector = bucketSort_1(to_fill_vector, available_threads, buckets_quan);
+            to_fill_vector = bucketSort_1(to_fill_vector, threads_quan, buckets_quan);
             break;
         case 2:
-            to_fill_vector = bucketSort_2(to_fill_vector, available_threads, buckets_quan);
+            to_fill_vector = bucketSort_2(to_fill_vector, threads_quan, buckets_quan);
             break;
         default:
             std::cout << "No such algorithm!\n";
