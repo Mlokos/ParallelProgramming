@@ -197,14 +197,11 @@ std::vector<float> bucketSort_2(std::vector<float> arr, int number_of_threads, i
         }
     }
     bucket_sizes.insert(bucket_sizes.begin(), 0);
-    for (auto elem : bucket_sizes) {
-        std::cout << elem << std::endl;
-    }
     
     #pragma omp parallel for schedule(runtime)
-    for(int thread_number = 0; thread_number < number_of_threads; ++thread_number) {
-        for (LLONG_UINT table_it = bucket_sizes[thread_number]; table_it < bucket_sizes[thread_number + 1]; ++table_it) {
-            arr[table_it] = b[thread_number][table_it - bucket_sizes[thread_number]];
+    for(int bucket_number = 0; bucket_number < buckets_quan; ++bucket_number) {
+        for (LLONG_UINT table_it = bucket_sizes[bucket_number]; table_it < bucket_sizes[bucket_number + 1]; ++table_it) {
+            arr[table_it] = b[bucket_number][table_it - bucket_sizes[bucket_number]];
         }
     }
     auto bucket_to_array_end = std::chrono::high_resolution_clock::now();
@@ -276,9 +273,10 @@ int main(int argc, char *argv[]) {
     std::cout << "table_fill_time " << (double)fill_table_duration.count()/1000000 << " [s]" << std::endl;
     std::cout << "program_time " << (double)program_duration.count()/1000000 << " [s]" << std::endl;
 
-    for (auto elem : to_fill_vector) {
-        std::cout << elem << std::endl;
-    }
+    // is table sorted
+    // for (auto elem : to_fill_vector) {
+    //     std::cout << elem << std::endl;
+    // }
 
     return 0;
  }
