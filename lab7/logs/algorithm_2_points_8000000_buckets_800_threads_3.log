@@ -1,0 +1,55 @@
+-------
+bucket_split_time 0.31239 [s]
+bucket_sort_time 2.53077 [s]
+bucket_to_array_time 0.15753 [s]
+table_fill_time 0.807506 [s]
+program_time 3.83833 [s]
+-------
+bucket_split_time 0.413746 [s]
+bucket_sort_time 2.53547 [s]
+bucket_to_array_time 0.160736 [s]
+table_fill_time 0.772506 [s]
+program_time 3.91539 [s]
+-------
+bucket_split_time 0.317819 [s]
+bucket_sort_time 2.56232 [s]
+bucket_to_array_time 0.156037 [s]
+table_fill_time 0.892772 [s]
+program_time 3.95897 [s]
+-------
+bucket_split_time 0.405903 [s]
+bucket_sort_time 2.6372 [s]
+bucket_to_array_time 0.155609 [s]
+table_fill_time 0.85525 [s]
+program_time 4.0857 [s]
+-------
+bucket_split_time 0.482717 [s]
+bucket_sort_time 2.5702 [s]
+bucket_to_array_time 0.157922 [s]
+table_fill_time 0.743494 [s]
+program_time 3.99436 [s]
+-------
+bucket_split_time 0.560185 [s]
+bucket_sort_time 2.49616 [s]
+bucket_to_array_time 0.163601 [s]
+table_fill_time 0.754064 [s]
+program_time 4.00472 [s]
+-------
+bucket_split_time 0.290725 [s]
+bucket_sort_time 2.70416 [s]
+bucket_to_array_time 0.243562 [s]
+table_fill_time 0.893413 [s]
+program_time 4.16223 [s]
+-------
+bucket_split_time 0.27862 [s]
+bucket_sort_time 2.84109 [s]
+bucket_to_array_time 0.222364 [s]
+table_fill_time 0.869927 [s]
+program_time 4.24432 [s]
+-------
+bucket_split_time 0.330302 [s]
+bucket_sort_time 2.96873 [s]
+bucket_to_array_time 0.180849 [s]
+table_fill_time 0.748599 [s]
+program_time 4.26148 [s]
+-------
